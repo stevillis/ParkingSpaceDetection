@@ -8,7 +8,7 @@ refPt = []
 numpyList = []
 cropping = False
 data = []
-file_path = 'parkinglot_1_480p.yml'
+file_path = 'datasets/parkinglot.yml'
 image = np.zeros((512, 512), np.uint8)
 
 #img = cv2.imread('parkinglot_1_480p.png')

@@ -13,6 +13,16 @@ import yaml
 import markpolygons
 
 import time
+import threading
+
+
+def time_parking_change(t):
+    """ Returns True after t seconds. """
+    print('{} starting...'.format(threading.currentThread().getName()))
+    # Thread is stopped for t seconds
+    time.sleep(t)
+    print('{} exiting...'.format(threading.currentThread().getName()))
+    return True
 
 
 def draw_masks(parking_data):
@@ -28,37 +38,52 @@ def draw_masks(parking_data):
             parking_bounding_rects.append(rect)
             mask = cv2.drawContours(np.zeros((rect[3], rect[2]), dtype=np.uint8), [points_shifted],
                                     contourIdx=-1, color=255, thickness=-1, lineType=cv2.LINE_8)
-            cv2.imshow('Mask', mask)
-            cv2.waitKey(0)
+            # cv2.imshow('Mask', mask)
+            # cv2.waitKey(0)
             mask = mask == 255
+
             parking_mask.append(mask)
     else:
         # Initialize the parking spaces marking
         markpolygons.start(cap)
 
 
-def detect_cars_and_vacant_spaces(frame_gray):
+def detect_cars_and_vacant_spaces(frame_blur):
     """ Detect cars and vacant spaces in parking. """
     global parking_space_empty
     # detecting cars and vacant spaces
     for ind, park in enumerate(parking_data):
         points = np.array(park['points'])
         rect = parking_bounding_rects[ind]
-        roi_gray = frame_gray[rect[1]:(rect[1] + rect[3]),
+        # roi_gray = frame_gray[rect[1]:(rect[1] + rect[3]),
+        # rect[0]:(rect[0] + rect[2])]  # crop roi for faster calculation
+        roi_gray = frame_blur[rect[1]:(rect[1] + rect[3]),
                    rect[0]:(rect[0] + rect[2])]  # crop roi for faster calculation
+
+        # cv2.imshow('roi_gray', roi_gray)
+        # cv2.waitKey(0)
         laplacian = cv2.Laplacian(roi_gray, cv2.CV_64F)
+
+        # cv2.imshow('laplacian', laplacian)
+        # cv2.waitKey(0)
 
         points[:, 0] = points[:, 0] - rect[0]  # shift contour to roi
         points[:, 1] = points[:, 1] - rect[1]
+
         delta = np.mean(np.abs(laplacian * parking_mask[ind]))
         status = delta < config['park_laplacian_th']
 
         # If detected a change in parking status, save the current time
-        if status != parking_status[ind] and parking_buffer[ind] == None:
+        if status != parking_status[ind] and parking_buffer[ind] is None:
             parking_buffer[ind] = time.time() - time_video
 
         # If status is still different than the one saved and counter is open
-        elif status != parking_status[ind] and parking_buffer[ind] != None:
+        elif status != parking_status[ind] and parking_buffer[ind] is not None:
+            """# Calls the thread and waits t seconds.
+            thread = threading.Thread(name='Thread-1', target=time_parking_change, args=(1,))
+            thread.start()
+            """
+
             if time_video - parking_buffer[ind] > config['park_sec_to_wait']:
                 parking_status[ind] = status
                 parking_buffer[ind] = None
@@ -70,7 +95,7 @@ def detect_cars_and_vacant_spaces(frame_gray):
                     print('Vaga {} está ocupada!'.format(str(int(park['id']) + 1)))
 
         # If status is still same and counter is open
-        elif status == parking_status[ind] and parking_buffer[ind] != None:
+        elif status == parking_status[ind] and parking_buffer[ind] is not None:
             parking_buffer[ind] = None
 
 
@@ -83,7 +108,6 @@ def print_parkIDs(park, coor_points, frame_rev):
 
 
 if __name__ == '__main__':
-
     # Path references
     fn_yaml = r'datasets/parkinglot.yml'
     config = {'park_laplacian_th': 1.8,
@@ -91,7 +115,7 @@ if __name__ == '__main__':
               'start_frame': 0}  # 35000 # begin frame from specific frame number
 
     # Set capture device
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
 
     cap.set(cv2.CAP_PROP_POS_FRAMES, config['start_frame'])  # jump to frame
 
@@ -111,42 +135,71 @@ if __name__ == '__main__':
         parking_status = [False] * len(parking_data)
         parking_buffer = [None] * len(parking_data)
 
-    while cap.isOpened():
-        # Read frame-by-frame
-        ret, frame = cap.read()
+        # list_time_of_while_execution = []
+        # While takes about 0.037 seconds for each loop
+        # 1 second ~ 27 while iterations
+        counter_of_while_executions = 0
 
-        # Conting time of video in seconds
-        time_video = time.time()
+        while cap.isOpened():
+            # time_execution = time.time()
 
-        if not ret:
-            print('Capture Error')
-            break
+            # Read frame-by-frame
+            ret, frame = cap.read()
 
-        # Background Subtraction
-        frame_blur = cv2.GaussianBlur(frame.copy(), (5, 5), 3)
-        frame_gray = cv2.cvtColor(frame_blur, cv2.COLOR_BGR2GRAY)
+            # Conting time of video in seconds
+            time_video = time.time()
 
-        detect_cars_and_vacant_spaces(frame_gray)
+            if not ret:
+                print('Capture Error')
+                break
 
-        # Changing the color on the basis on status change occured in the aboce section and putting numbers on areas
-        frame_out = frame.copy()
-        for ind, park in enumerate(parking_data):
-            points = np.array(park['points'])
-            if parking_status[ind]:
-                color = (0, 255, 0)
-            else:
-                color = (0, 0, 255)
+            # Background Subtraction
+            # frame_blur = cv2.GaussianBlur(frame.copy(), (5, 5), 3)
+            # frame_gray = cv2.cvtColor(frame_blur, cv2.COLOR_BGR2GRAY)
 
-            cv2.drawContours(frame_out, [points], contourIdx=-1, color=color, thickness=2, lineType=cv2.LINE_8)
-            print_parkIDs(park, points, frame_out)
+            frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            __, dst = cv2.threshold(frame_gray, 40, 255, cv2.THRESH_BINARY);
+            frame_blur = cv2.GaussianBlur(dst, (5, 5), 3)
 
-        # Display video
-        cv2.imshow('frame', frame_out)
-        k = cv2.waitKey(1)
-        if k == 27:
-            break
+            # detect_cars_and_vacant_spaces(frame_gray)
+            # detect_cars_and_vacant_spaces(frame_blur)
 
-    # time.sleep(1)
+            if counter_of_while_executions == 27:
+                detect_cars_and_vacant_spaces(frame_blur)
+                counter_of_while_executions = 0
 
-    cap.release()
-    cv2.destroyAllWindows()
+            # Changing the color on the basis on status change occured in the aboce section and putting numbers on areas
+            frame_out = frame.copy()
+            for ind, park in enumerate(parking_data):
+                points = np.array(park['points'])
+                if parking_status[ind]:
+                    color = (0, 255, 0)
+                else:
+                    color = (0, 0, 255)
+
+                cv2.drawContours(frame_out, [points], contourIdx=-1, color=color, thickness=2, lineType=cv2.LINE_8)
+                print_parkIDs(park, points, frame_out)
+
+            # Display video
+            cv2.imshow('frame', frame_out)
+            k = cv2.waitKey(1)
+            if k == 27:
+                break
+            elif k & 0xFF == ord('d'):
+                with open(fn_yaml, 'w') as stream:
+                    pass
+                break
+
+            """time_execution2 = time.time() - time_execution
+            list_time_of_while_execution.append(time_execution2)
+            print('Tempo de execução', time_execution2)
+            if len(list_time_of_while_execution) > 100:
+                print('Mean of time execution:', sum(list_time_of_while_execution)/len(list_time_of_while_execution))
+                break
+            """
+            counter_of_while_executions += 1
+            # print(counter_of_while_executions)
+        # time.sleep(1)
+
+        cap.release()
+        cv2.destroyAllWindows()

@@ -2,17 +2,13 @@ import threading
 import time
 
 
-def worker(t):
+def time_parking_change(t):
     print('{} starting...'.format(threading.currentThread().getName()))
     # Thread is stopped for t seconds
     time.sleep(t)
     print('{} exiting...'.format(threading.currentThread().getName()))
 
 
-# Threads are created using the Thread class, these are associated with the
-# objective function to be executed by the thread. Function attribute are
-# given using the 'args' keyword. In this example, we only need to give one
-# argument. For this reason a one value tuple is give.
-
-w = threading.Thread(name='Thread 2', target=worker, args=(3,))
-w.start()
+def start_thread(t):
+    w = threading.Thread(name='Thread 2', target=time_parking_change, args=(1,))
+    w.start()

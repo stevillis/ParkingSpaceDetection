@@ -8,21 +8,10 @@ title: Smart Parking System
 
 import cv2
 import numpy as np
-
-import yaml
-import markpolygons
-
 import time
-import threading
+import yaml
 
-
-def time_parking_change(t):
-    """ Returns True after t seconds. """
-    print('{} starting...'.format(threading.currentThread().getName()))
-    # Thread is stopped for t seconds
-    time.sleep(t)
-    print('{} exiting...'.format(threading.currentThread().getName()))
-    return True
+import markpolygons
 
 
 def draw_masks(parking_data):
@@ -79,15 +68,9 @@ def detect_cars_and_vacant_spaces(frame_blur):
 
         # If status is still different than the one saved and counter is open
         elif status != parking_status[ind] and parking_buffer[ind] is not None:
-            """# Calls the thread and waits t seconds.
-            thread = threading.Thread(name='Thread-1', target=time_parking_change, args=(1,))
-            thread.start()
-            """
-
             if time_video - parking_buffer[ind] > config['park_sec_to_wait']:
                 parking_status[ind] = status
                 parking_buffer[ind] = None
-                parking_space_empty = not parking_space_empty
 
                 if parking_space_empty:
                     print('Vaga {} está vazia!'.format(str(int(park['id']) + 1)))
@@ -110,7 +93,7 @@ def print_parkIDs(park, coor_points, frame_rev):
 if __name__ == '__main__':
     # Path references
     fn_yaml = r'datasets/parkinglot.yml'
-    config = {'park_laplacian_th': 1.8,
+    config = {'park_laplacian_th': 2.1,
               'park_sec_to_wait': 2000,  # 4 wait time for changing the status of a region
               'start_frame': 0}  # 35000 # begin frame from specific frame number
 
@@ -126,7 +109,6 @@ if __name__ == '__main__':
     parking_bounding_rects = []
     parking_mask = []
     parking_space_empty = True
-    first_loop = True
 
     # Draw parking masks
     draw_masks(parking_data)
@@ -146,7 +128,7 @@ if __name__ == '__main__':
             # Read frame-by-frame
             ret, frame = cap.read()
 
-            # Conting time of video in seconds
+            # Counting time of video in seconds
             time_video = time.time()
 
             if not ret:
@@ -158,8 +140,10 @@ if __name__ == '__main__':
             # frame_gray = cv2.cvtColor(frame_blur, cv2.COLOR_BGR2GRAY)
 
             frame_gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-            __, dst = cv2.threshold(frame_gray, 40, 255, cv2.THRESH_BINARY);
-            frame_blur = cv2.GaussianBlur(dst, (5, 5), 3)
+            clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+            frame_his = clahe.apply(frame_gray)
+            __, frame_thr = cv2.threshold(frame_his, 40, 255, cv2.THRESH_BINARY);
+            frame_blur = cv2.GaussianBlur(frame_thr, (5, 5), 3)
 
             # detect_cars_and_vacant_spaces(frame_gray)
             # detect_cars_and_vacant_spaces(frame_blur)
@@ -174,8 +158,10 @@ if __name__ == '__main__':
                 points = np.array(park['points'])
                 if parking_status[ind]:
                     color = (0, 255, 0)
+                    parking_space_empty = True
                 else:
                     color = (0, 0, 255)
+                    parking_space_empty = False
 
                 cv2.drawContours(frame_out, [points], contourIdx=-1, color=color, thickness=2, lineType=cv2.LINE_8)
                 print_parkIDs(park, points, frame_out)

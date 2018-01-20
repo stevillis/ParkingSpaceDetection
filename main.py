@@ -41,28 +41,41 @@ def draw_masks(parking_data):
 
 def detect_cars_and_vacant_spaces(frame_blur):
     """ Detect cars and vacant spaces in parking. """
-    global parking_space_empty
+
+    # Dictionary of parking spaces status informations.
+    parking_dict = {}
     # detecting cars and vacant spaces
     for ind, park in enumerate(parking_data):
+
         points = np.array(park['points'])
         rect = parking_bounding_rects[ind]
         # roi_gray = frame_gray[rect[1]:(rect[1] + rect[3]),
         # rect[0]:(rect[0] + rect[2])]  # crop roi for faster calculation
         roi_gray = frame_blur[rect[1]:(rect[1] + rect[3]),
                    rect[0]:(rect[0] + rect[2])]  # crop roi for faster calculation
-
-        # cv2.imshow('roi_gray', roi_gray)
-        # cv2.waitKey(0)
         laplacian = cv2.Laplacian(roi_gray, cv2.CV_64F)
-
-        # cv2.imshow('laplacian', laplacian)
-        # cv2.waitKey(0)
-
         points[:, 0] = points[:, 0] - rect[0]  # shift contour to roi
         points[:, 1] = points[:, 1] - rect[1]
 
         delta = np.mean(np.abs(laplacian * parking_mask[ind]))
         status = delta < config['park_laplacian_th']
+
+        # While parking spaces isn't in the end, add parking index and status to the parking_dict
+        print(ind, len(parking_data))
+        if ind < len(parking_data):
+            parking_dict[str(ind + 1)] = parking_status[ind]  # ind starts in 0
+        if ind == 1:  # When all the parking spaces were done, send the dict to webserver
+            print('Before:', webserver.parking_spaces)
+            webserver.update_parking_spaces(dict(parking_dict))
+            print('After:', webserver.parking_spaces)
+            parking_dict.clear()
+
+        if parking_status[ind]:
+            pass
+            # print('Vaga {} está vazia!'.format(str(int(park['id']) + 1)))
+        else:
+            pass
+            # print('Vaga {} está ocupada!'.format(str(int(park['id']) + 1)))
 
         # If detected a change in parking status, save the current time
         if status != parking_status[ind] and parking_buffer[ind] is None:
@@ -74,10 +87,6 @@ def detect_cars_and_vacant_spaces(frame_blur):
                 parking_status[ind] = status
                 parking_buffer[ind] = None
 
-                if parking_space_empty:
-                    print('Vaga {} está vazia!'.format(str(int(park['id']) + 1)))
-                else:
-                    print('Vaga {} está ocupada!'.format(str(int(park['id']) + 1)))
 
         # If status is still same and counter is open
         elif status == parking_status[ind] and parking_buffer[ind] is not None:
@@ -100,7 +109,7 @@ if __name__ == '__main__':
               'start_frame': 0}  # 35000 # begin frame from specific frame number
 
     # Set capture device
-    cap = cv2.VideoCapture(0)
+    cap = cv2.VideoCapture(1)
 
     cap.set(cv2.CAP_PROP_POS_FRAMES, config['start_frame'])  # jump to frame
 
@@ -110,7 +119,6 @@ if __name__ == '__main__':
     parking_contours = []
     parking_bounding_rects = []
     parking_mask = []
-    parking_space_empty = True
 
     # Draw parking masks
     draw_masks(parking_data)
@@ -125,6 +133,7 @@ if __name__ == '__main__':
         counter_of_while_executions = 0
 
         while cap.isOpened():
+
             # time_execution = time.time()
 
             # Read frame-by-frame
@@ -160,10 +169,8 @@ if __name__ == '__main__':
                 points = np.array(park['points'])
                 if parking_status[ind]:
                     color = (0, 255, 0)
-                    parking_space_empty = True
                 else:
                     color = (0, 0, 255)
-                    parking_space_empty = False
 
                 cv2.drawContours(frame_out, [points], contourIdx=-1, color=color, thickness=2, lineType=cv2.LINE_8)
                 print_parkIDs(park, points, frame_out)

@@ -41,9 +41,8 @@ def draw_masks(parking_data):
 
 def detect_cars_and_vacant_spaces(frame_blur):
     """ Detect cars and vacant spaces in parking. """
-
-    # Dictionary of parking spaces status informations.
     parking_dict = {}
+
     # detecting cars and vacant spaces
     for ind, park in enumerate(parking_data):
 
@@ -61,21 +60,20 @@ def detect_cars_and_vacant_spaces(frame_blur):
         status = delta < config['park_laplacian_th']
 
         # While parking spaces isn't in the end, add parking index and status to the parking_dict
-        print(ind, len(parking_data))
         if ind < len(parking_data):
             parking_dict[str(ind + 1)] = parking_status[ind]  # ind starts in 0
-        if ind == 1:  # When all the parking spaces were done, send the dict to webserver
-            print('Before:', webserver.parking_spaces)
-            webserver.update_parking_spaces(dict(parking_dict))
-            print('After:', webserver.parking_spaces)
-            parking_dict.clear()
+        if ind == len(parking_data) - 1:  # When all the parking spaces were done
+            # Write the parking_dict in a temp_file to be read after
+            f = open('file_temp.txt', 'w')
+            f.write(str(parking_dict))
+            f.close()
+
+            parking_dict.clear() # Clear the dict to restart the process
 
         if parking_status[ind]:
-            pass
-            # print('Vaga {} está vazia!'.format(str(int(park['id']) + 1)))
+            print('Vaga {} está vazia!'.format(str(int(park['id']) + 1)))
         else:
-            pass
-            # print('Vaga {} está ocupada!'.format(str(int(park['id']) + 1)))
+            print('Vaga {} está ocupada!'.format(str(int(park['id']) + 1)))
 
         # If detected a change in parking status, save the current time
         if status != parking_status[ind] and parking_buffer[ind] is None:
@@ -102,6 +100,7 @@ def print_parkIDs(park, coor_points, frame_rev):
 
 
 if __name__ == '__main__':
+
     # Path references
     fn_yaml = r'datasets/parkinglot.yml'
     config = {'park_laplacian_th': 2.1,

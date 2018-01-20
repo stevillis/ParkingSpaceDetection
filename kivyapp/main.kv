@@ -1,0 +1,42 @@
+# File name: main.kv
+#: kivy 1.10.0
+
+
+<Label>:
+    font_size: 20
+
+<Main>:
+    BoxLayout:
+        id: main_layout
+        orientation: 'vertical'
+
+        Label:
+            id: label_total
+            text: 'Parking spaces total: '
+            pos_hint: {'x': 0, 'top':1}
+        Label:
+            id: label_available
+            text: 'Parking spaces available: '
+            pos_hint: {'x': 0, 'top':.3}
+
+        GridLayout:
+            cols: 3
+            rows: 6
+
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint: 0.15, 0.2
+
+                Image:
+                    source: root.parking_space_available
+
+                Image:
+                    source: root.parking_space_available
+
+                Image:
+                    source: root.parking_space_available
+        Button:
+            text: 'Update'
+            font_size: 20
+
+            on_press: root.update()

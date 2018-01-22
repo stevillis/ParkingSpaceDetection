@@ -17,5 +17,15 @@ def index():
     return open('../file_temp.txt', 'r').read()
 
 
-if __name__ == '__main__':
+def start():
+    """
+    Starts the web server.
+    :return: None
+    """
     app.run(debug=True, host='0.0.0.0')
+
+
+if __name__ == '__main__':
+    start()
+
+# app.run(debug=True, host='0.0.0.0')

@@ -1,0 +1,10 @@
+<WindowMain>:
+    orientation: 'vertical'
+    Button:
+        #size_hint: .5, .09
+        size_hint: None, None
+        size: 350, 50
+        #pos_hint: {'x':.1, 'y':.1}
+        center: root.width - self.width, root.height - self.height
+        text: 'Update'
+        on_press: root.on_press_bt()

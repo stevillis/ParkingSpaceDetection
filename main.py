@@ -6,14 +6,13 @@ title: Smart Parking System
 
 """
 
+import time
+
 import cv2
 import numpy as np
-import time
 import yaml
 
 import markpolygons
-
-from webparking import webserver
 
 
 def draw_masks(parking_data):
@@ -68,7 +67,7 @@ def detect_cars_and_vacant_spaces(frame_blur):
             f.write(str(parking_dict))
             f.close()
 
-            parking_dict.clear() # Clear the dict to restart the process
+            parking_dict.clear()  # Clear the dict to restart the process
 
         if parking_status[ind]:
             print('Vaga {} está vazia!'.format(str(int(park['id']) + 1)))
@@ -111,6 +110,12 @@ if __name__ == '__main__':
     cap = cv2.VideoCapture(1)
 
     cap.set(cv2.CAP_PROP_POS_FRAMES, config['start_frame'])  # jump to frame
+
+    # Start the webserver
+    # webserver.start()
+
+    # Start the kivy application
+    # mainapp.start()
 
     # Read YAML data (parking space polygons)
     with open(fn_yaml, 'r') as stream:

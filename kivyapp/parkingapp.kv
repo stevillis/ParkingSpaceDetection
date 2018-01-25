@@ -1,18 +1,77 @@
 <WindowMain>:
-    orientation: 'vertical'
-    Button:
-        #size_hint: .5, .09
-        size_hint: None, None
-        size: 350, 50
-        #pos_hint: {'x':.1, 'y':.1}
-        center: root.width - self.width, root.height - self.height
-        text: 'Update'
-        on_press: root.on_press_bt()
-<Picture>: # the "-" will tell kv to drop the rule inherited from Image.
-    canvas:
-        Color:
-            rgb: (1,1,1)
-        Rectangle:
-            texture: self.texture
-            size: self.size + 20, self.height + 20
-            pos: self.x - 10, self.y - 10
+    orientation: "vertical"
+
+    # Vagas e rua
+    BoxLayout:
+        id: box_layout_vagas_rua
+        orientation: 'horizontal'
+        size_hint: 1., 1.
+        #spacing: 5
+
+        # Vagas lado esquerdo
+        StackLayout:
+            id: stack_layout_vaga_esquerda
+            orientation: "bt-lr"
+            size_hint: .25, 1.
+            spacing: 5, 5
+            pos_hint: {'left': 1.}
+
+            Button:
+                size_hint: 1., 1.
+                text: "A"
+
+        # Imagem do centro
+        BoxLayout:
+            id: box_layout_rua
+            orientation: 'vertical'
+            size_hint: .5, 1.
+            pos_hint: {'x': .5, 'y':1.}
+            canvas:
+                Color:
+                    rgb: 1, 1, 1
+                Rectangle:
+                    pos: box_layout_vagas_rua.width-box_layout_vagas_rua.width*0.75, box_layout_vagas_rua.y
+                    size: self.width, self.height
+                    source: 'images/street.png'
+
+        # Vagas lado direito
+        StackLayout:
+            id: stack_layout_vaga_direita
+            orientation: "bt-lr"
+            size_hint: .25, 1.
+            pos_hint: {'right': 1.}
+            spacing: 5, 5
+
+            Button:
+                size_hint: 1., 1.
+                text: "C"
+
+
+
+    # Botão Update na parte inferior e no centro
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: 1., .1
+        padding: 2
+        #pos_hint: {"x":1., "bottom":1.}
+
+        # Label to add some space and put button_update in the center
+        Label:
+            text: " "
+
+        # Button to update the parking spaces
+        Button:
+            id: button_update
+            font_name: 'consola'
+            text: 'Update'
+            on_press: root.on_press_bt()
+
+        # Label to add some space and put button_update in the center
+        Label:
+            text: " "
+    # Concluído daqui pra cima o layout
+
+
+
+
+

@@ -107,7 +107,7 @@ if __name__ == '__main__':
               'start_frame': 0}  # 35000 # begin frame from specific frame number
 
     # Set capture device
-    cap = cv2.VideoCapture(1)
+    cap = cv2.VideoCapture(0)
 
     cap.set(cv2.CAP_PROP_POS_FRAMES, config['start_frame'])  # jump to frame
 

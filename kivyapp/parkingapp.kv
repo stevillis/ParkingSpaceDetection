@@ -16,9 +16,9 @@
             spacing: 5, 5
             pos_hint: {'left': 1.}
 
-            Button:
-                size_hint: 1., .1
-                text: "1"
+            #Button:
+                #size_hint: 1., .1
+                #text: "1"
 
         # Imagem do centro (rua)
         BoxLayout:
@@ -42,9 +42,9 @@
             pos_hint: {'right': 1.}
             spacing: 5, 5
 
-            Button:
-                size_hint: 1., .1
-                text: "C"
+            #Button:
+                #size_hint: 1., .1
+                #text: "C"
 
     # Botão Update na parte inferior e no centro
     BoxLayout:
@@ -85,3 +85,15 @@
     # Concluído daqui pra cima o layout
 
 #WindowMain:
+
+<ParkingFreeSpace>:
+    orientation: "vertical"
+    size_hint: .5, 1.
+    pos_hint: {'x': .5, 'y':1.}
+    canvas:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            source: 'images/parking_free.png'
+            size: root.size
+            pos: root.x-self.x*10/100, root.y

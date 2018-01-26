@@ -5,7 +5,7 @@
     BoxLayout:
         id: box_layout_vagas_rua
         orientation: 'horizontal'
-        size_hint: 1., 1.
+        size_hint: 1., .9
         #spacing: 5
 
         # Vagas lado esquerdo
@@ -17,10 +17,10 @@
             pos_hint: {'left': 1.}
 
             Button:
-                size_hint: 1., 1.
-                text: "A"
+                size_hint: 1., .1
+                text: "1"
 
-        # Imagem do centro
+        # Imagem do centro (rua)
         BoxLayout:
             id: box_layout_rua
             orientation: 'vertical'
@@ -43,10 +43,8 @@
             spacing: 5, 5
 
             Button:
-                size_hint: 1., 1.
+                size_hint: 1., .1
                 text: "C"
-
-
 
     # Botão Update na parte inferior e no centro
     BoxLayout:
@@ -54,6 +52,25 @@
         size_hint: 1., .1
         padding: 2
         #pos_hint: {"x":1., "bottom":1.}
+
+        # Label to add some space and put button_update in the center
+        #Label:
+        #    text: " "
+        #Labels informativos:
+        BoxLayout:
+            orientation: "vertical"
+            id: box_layout_labels
+
+            size_hint: 1., 1.
+            pos_hint: {"x":1., "bottom":1.}
+            Label:
+                id: label_total_vagas
+                size_hint: 1. ,.5
+                text: "Total de vagas: "
+            Label:
+                id: label_vagas_disponiveis
+                size_hint: 1. ,.5
+                text: "Vagas disponiveis: "
 
         # Label to add some space and put button_update in the center
         Label:
@@ -65,13 +82,6 @@
             font_name: 'consola'
             text: 'Update'
             on_press: root.on_press_bt()
-
-        # Label to add some space and put button_update in the center
-        Label:
-            text: " "
     # Concluído daqui pra cima o layout
 
-
-
-
-
+#WindowMain:

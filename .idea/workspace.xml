@@ -3,11 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="07016f5d-d110-41d9-aec6-de2f820eb4c2" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/datasets/parkinglot.yml" afterPath="$PROJECT_DIR$/datasets/parkinglot.yml" />
-      <change beforePath="$PROJECT_DIR$/file_temp.txt" afterPath="$PROJECT_DIR$/file_temp.txt" />
-      <change beforePath="$PROJECT_DIR$/kivyapp/mainapp.py" afterPath="$PROJECT_DIR$/kivyapp/mainapp.py" />
-      <change beforePath="$PROJECT_DIR$/kivyapp/parkingapp.kv" afterPath="$PROJECT_DIR$/kivyapp/parkingapp.kv" />
+      <change beforePath="$PROJECT_DIR$/kivyapp/mainapp.py" afterPath="$PROJECT_DIR$/kivyapp/main.py" />
+      <change beforePath="$PROJECT_DIR$/kivyapp/parkingapp.kv" afterPath="$PROJECT_DIR$/kivyapp/parking.kv" />
       <change beforePath="$PROJECT_DIR$/main.py" afterPath="$PROJECT_DIR$/main.py" />
+      <change beforePath="$PROJECT_DIR$/webparking/webserver.py" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,22 +17,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="mainapp.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/kivyapp/mainapp.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="29" column="37" lean-forward="true" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tkinterapp/main.py">
+        <entry file="file://$PROJECT_DIR$/kivyapp/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="14" lean-forward="false" selection-start-line="0" selection-start-column="14" selection-end-line="0" selection-end-column="14" />
-              <folding />
+            <state relative-caret-position="17">
+              <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -41,8 +32,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="97" column="31" lean-forward="false" selection-start-line="97" selection-start-column="31" selection-end-line="97" selection-end-column="31" />
+            <state relative-caret-position="206">
+              <caret line="109" column="28" lean-forward="false" selection-start-line="109" selection-start-column="28" selection-end-line="109" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -51,18 +42,18 @@
       <file leaf-file-name="webserver.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/webparking/webserver.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="23" column="7" lean-forward="true" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+            <state relative-caret-position="271">
+              <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="parkingapp.kv" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/kivyapp/parkingapp.kv">
+      <file leaf-file-name="parking.kv" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/kivyapp/parking.kv">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2">
-              <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+            <state relative-caret-position="-40">
+              <caret line="66" column="37" lean-forward="false" selection-start-line="66" selection-start-column="20" selection-end-line="66" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -79,7 +70,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>video_cur_pos</find>
       <find>change_pos</find>
       <find>park_sec_to_wait</find>
       <find>&gt;</find>
@@ -109,10 +99,13 @@
       <find>Update</find>
       <find>direita</find>
       <find>(0)</find>
+      <find>total_vagas</find>
     </findStrings>
     <replaceStrings>
       <replace>time_video</replace>
       <replace>parking_space_empty</replace>
+      <replace>free_parking_spaces</replace>
+      <replace>total_parking_spaces</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -143,12 +136,14 @@
         <option value="$PROJECT_DIR$/kivyapp/customrow.kv" />
         <option value="$PROJECT_DIR$/kivyapp/customgrid.py" />
         <option value="$PROJECT_DIR$/kivyapp/customrow.py" />
-        <option value="$PROJECT_DIR$/kivyapp/main.py" />
         <option value="$PROJECT_DIR$/webparking/webserver.py" />
         <option value="$PROJECT_DIR$/kivyapp/parkingimg.kv" />
         <option value="$PROJECT_DIR$/kivyapp/parkingapp.kv" />
+        <option value="$PROJECT_DIR$/__init__.py" />
+        <option value="$PROJECT_DIR$/kivyapp/__init__..py" />
         <option value="$PROJECT_DIR$/kivyapp/mainapp.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/kivyapp/main.py" />
       </list>
     </option>
   </component>
@@ -172,7 +167,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -194,6 +188,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -202,15 +197,16 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\cezarfontourahotmail\Documents\Livros\8º semestre\Sistemas Embarcados\ParkingSpaceDetection\test" />
-      <recent name="C:\Users\cezarfontourahotmail\Documents\Livros\8º semestre\Sistemas Embarcados\ParkingSpaceDetection" />
-      <recent name="C:\Users\cezarfontourahotmail\Documents\Livros\8º semestre\Sistemas Embarcados\ParkingSpaceDetection\webparking" />
-      <recent name="C:\Users\cezarfontourahotmail\Documents\Livros\8º semestre\Sistemas Embarcados\ParkingSpaceDetection\datasets" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\cezarfontourahotmail\Documents\Livros\8º semestre\Sistemas Embarcados\ParkingSpaceDetection\kivyapp" />
       <recent name="C:\Users\cezarfontourahotmail\Documents\Livros\8º semestre\Sistemas Embarcados\ParkingSpaceDetection\kivyapp\images" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\cezarfontourahotmail\Documents\Livros\8º semestre\Sistemas Embarcados\ParkingSpaceDetection\webparking" />
+      <recent name="C:\Users\cezarfontourahotmail\Documents\Livros\8º semestre\Sistemas Embarcados\ParkingSpaceDetection\kivyapp" />
+      <recent name="C:\Users\cezarfontourahotmail\Documents\Livros\8º semestre\Sistemas Embarcados\ParkingSpaceDetection\test" />
+      <recent name="C:\Users\cezarfontourahotmail\Documents\Livros\8º semestre\Sistemas Embarcados\ParkingSpaceDetection" />
+      <recent name="C:\Users\cezarfontourahotmail\Documents\Livros\8º semestre\Sistemas Embarcados\ParkingSpaceDetection\datasets" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -225,8 +221,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.mainapp">
-    <configuration name="main (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.main (3)">
+    <configuration name="main (3)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -238,25 +234,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="ParkingSpaceDetection" />
-      <option name="SCRIPT_NAME" value="C:\Users\cezarfontourahotmail\Documents\Livros\8º semestre\Sistemas Embarcados\ParkingSpaceDetection\test\main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-    </configuration>
-    <configuration name="main (2)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/kivyapp" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="ParkingSpaceDetection" />
-      <option name="SCRIPT_NAME" value="C:\Users\cezarfontourahotmail\Documents\Livros\8º semestre\Sistemas Embarcados\ParkingSpaceDetection\kivyapp\mainapp.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kivyapp/main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -292,13 +270,31 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="ParkingSpaceDetection" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/kivyapp/mainapp.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\cezarfontourahotmail\Documents\Livros\8º semestre\Sistemas Embarcados\ParkingSpaceDetection\kivyapp\main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <configuration name="webserver (2)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/webparking" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="ParkingSpaceDetection" />
+      <option name="SCRIPT_NAME" value="C:\Users\cezarfontourahotmail\Documents\Livros\8º semestre\Sistemas Embarcados\ParkingSpaceDetection\kivyapp\webserver.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="webserver" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -319,17 +315,17 @@
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.main" />
       <item index="1" class="java.lang.String" itemvalue="Python.webserver (2)" />
-      <item index="2" class="java.lang.String" itemvalue="Python.main (1)" />
-      <item index="3" class="java.lang.String" itemvalue="Python.main (2)" />
-      <item index="4" class="java.lang.String" itemvalue="Python.mainapp" />
+      <item index="2" class="java.lang.String" itemvalue="Python.mainapp" />
+      <item index="3" class="java.lang.String" itemvalue="Python.main (3)" />
+      <item index="4" class="java.lang.String" itemvalue="Python.webserver" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.mainapp" />
-        <item index="1" class="java.lang.String" itemvalue="Python.webserver (2)" />
-        <item index="2" class="java.lang.String" itemvalue="Python.main" />
-        <item index="3" class="java.lang.String" itemvalue="Python.main (2)" />
-        <item index="4" class="java.lang.String" itemvalue="Python.main (1)" />
+        <item index="0" class="java.lang.String" itemvalue="Python.main (3)" />
+        <item index="1" class="java.lang.String" itemvalue="Python.main" />
+        <item index="2" class="java.lang.String" itemvalue="Python.webserver" />
+        <item index="3" class="java.lang.String" itemvalue="Python.mainapp" />
+        <item index="4" class="java.lang.String" itemvalue="Python.webserver (2)" />
       </list>
     </recent_temporary>
   </component>
@@ -438,18 +434,25 @@
       <option name="project" value="LOCAL" />
       <updated>1516925704390</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Kivy communication webserver. Everything working!">
+      <created>1516979046118</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1516979046118</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15029761" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1592262" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2175926" sideWeight="0.50595236" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3287037" sideWeight="0.4940476" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3271605" sideWeight="0.4940476" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2808642" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27623457" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -497,7 +500,8 @@
     <MESSAGE value="Automatic detection of parking spaces in test." />
     <MESSAGE value="Updating App's Layout." />
     <MESSAGE value="Adding images to app." />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding images to app." />
+    <MESSAGE value="Kivy communication webserver. Everything working!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Kivy communication webserver. Everything working!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -506,27 +510,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/test/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/main.kv">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/main.kv">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -696,13 +679,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/webparking/webreader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/kivyapp/images/parking_busy_icon.png" />
     <entry file="file://$PROJECT_DIR$/kivyapp/images/parking_gray_icon.png" />
     <entry file="file://$PROJECT_DIR$/kivyapp/images/street.png">
@@ -731,7 +707,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="130" column="0" lean-forward="false" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -746,7 +721,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="966">
           <caret line="800" column="0" lean-forward="false" selection-start-line="800" selection-start-column="0" selection-end-line="800" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -758,10 +732,18 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/kivyapp/parkingimg.kv" />
-    <entry file="file://$PROJECT_DIR$/kivyapp/parkingapp.kv">
+    <entry file="file://$PROJECT_DIR$/kivyapp/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2">
-          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -774,26 +756,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/webparking/webreader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="97" column="31" lean-forward="false" selection-start-line="97" selection-start-column="31" selection-end-line="97" selection-end-column="31" />
+        <state relative-caret-position="153">
+          <caret line="9" column="4" lean-forward="false" selection-start-line="9" selection-start-column="4" selection-end-line="9" selection-end-column="4" />
+          <folding>
+            <element signature="e#70#85#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/webparking/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/webparking/webserver.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="23" column="7" lean-forward="true" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+        <state relative-caret-position="271">
+          <caret line="18" column="0" lean-forward="true" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/kivyapp/mainapp.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="29" column="37" lean-forward="true" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
+        <state relative-caret-position="206">
+          <caret line="109" column="28" lean-forward="false" selection-start-line="109" selection-start-column="28" selection-end-line="109" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kivyapp/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="13" column="0" lean-forward="true" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kivyapp/parking.kv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-40">
+          <caret line="66" column="37" lean-forward="false" selection-start-line="66" selection-start-column="20" selection-end-line="66" selection-end-column="37" />
           <folding />
         </state>
       </provider>

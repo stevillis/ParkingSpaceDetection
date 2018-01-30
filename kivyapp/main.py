@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 import sys
 
@@ -23,15 +25,23 @@ class WindowMain(BoxLayout):
         self.ids.stack_layout_vaga_esquerda.clear_widgets()
         self.ids.stack_layout_vaga_direita.clear_widgets()
 
-        dic_web = webreader.read_web('http://192.168.1.3:5000')
+        dic_web = webreader.read_web('http://192.168.137.26:5000')
+        print(dic_web)
+
+        # Sort dic_web to
+        # a list of tuples with dic_web keys ordered
+        dic_web_sorted = sorted(dic_web.items())
+        print(dic_web_sorted)
 
         # Parking space counters
         free_parking_spaces = 0
         total_parking_spaces = len(dic_web)
 
-        for key, value in dic_web.items():
-            if int(key) <= 10:  # Add 10 parking spaces images in the left StackLayout
-                if value:  # Vaga vazia
+        for item in dic_web_sorted:
+            print(item)
+            # item[0] -> key, item[1] -> value
+            if int(item[0]) <= 10:  # Add 10 parking spaces images in the left StackLayout                
+                if item[1]:  # Vaga vazia
                     img = Image(source='images/parking_free.png', size_hint=(1, .1))
                     self.ids.stack_layout_vaga_esquerda.add_widget(img)
                     free_parking_spaces += 1
@@ -39,7 +49,7 @@ class WindowMain(BoxLayout):
                     img = Image(source='images/parking_busy.png', size_hint=(1, .1))
                     self.ids.stack_layout_vaga_esquerda.add_widget(img)
             else:  # Add 10 parking spaces images in the right StackLayout
-                if value:  # Vaga vazia
+                if item[1]:  # Vaga vazia
                     img = Image(source='images/parking_free.png', size_hint=(1, .1))
                     self.ids.stack_layout_vaga_direita.add_widget(img)
                     free_parking_spaces += 1

@@ -1,17 +1,17 @@
+# -*- coding: utf-8 -*-
 # press escape to finish doing real time boxing.
 # Program marks the polygons in the figure when it gets 4 double clicks
+
 import cv2
-import yaml
 import numpy as np
+import yaml
 
 refPt = []
-numpyList = []
 cropping = False
 data = []
 file_path = 'datasets/parkinglot.yml'
 image = np.zeros((512, 512), np.uint8)
 
-#img = cv2.imread('parkinglot_1_480p.png')
 
 def yaml_loader(file_path):
     with open(file_path, "r") as file_descr:
@@ -46,8 +46,8 @@ def click_and_crop(event, x, y, flags, param):
             if yaml_loader(file_path) != None:
                 data_already = len(data) + len(yaml_loader(file_path))
             else:
-                data_already = len(data) 
-        
+                data_already = len(data)
+
         cv2.line(image, refPt[0], refPt[1], (0, 255, 0), 1)
         cv2.line(image, refPt[1], refPt[2], (0, 255, 0), 1)
         cv2.line(image, refPt[2], refPt[3], (0, 255, 0), 1)
@@ -57,24 +57,24 @@ def click_and_crop(event, x, y, flags, param):
         temp_lst2 = list(refPt[3])
         temp_lst3 = list(refPt[0])
         temp_lst4 = list(refPt[1])
-        
+
         current_pt['points'] = [temp_lst1, temp_lst2, temp_lst3, temp_lst4]
         current_pt['id'] = data_already
         data.append(current_pt)
         # data_already+=1
         refPt = []
-        numpyList = []
+
 
 def start(cap):
     # data list into yaml file    
     if data == []:
         global image
-        
+
         print('Selecione as vagas e pressione Esc quando terminar.')
-        
+
         _, frame = cap.read()
         image = frame.copy()
-        
+
         cv2.namedWindow("Double click to mark points")
         cv2.imshow("Double click to mark points", image)
         cv2.setMouseCallback("Double click to mark points", click_and_crop)
@@ -82,10 +82,9 @@ def start(cap):
         while True:
             # display the image and wait for a keypress
             cv2.imshow("Double click to mark points", image)
-            key = cv2.waitKey(1) & 0xFF
             if cv2.waitKey(33) == 27:
                 break
 
         print('Salvando marcações de vagas...')
-        yaml_dump(file_path, data)               
-        cv2.destroyAllWindows() #important to prevent window from becoming inresponsive
+        yaml_dump(file_path, data)
+        cv2.destroyAllWindows()  # important to prevent window from becoming inresponsive

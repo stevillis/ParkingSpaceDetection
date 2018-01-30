@@ -1,4 +1,4 @@
-# File name: webserver.py
+# -*- coding: utf-8 -*-
 """
 Read the content in webserver page
 """
@@ -13,7 +13,7 @@ def read_web(address):
     :return: A dictonary with the parking informations
     """
     page = requests.get(address)
-    if page.status_code == 200:  # Page downloaded succesfuly
+    if page.status_code == 200:  # Page downloaded successfully
         data = page.content.decode('utf-8')  # Converting page downloaded in bytes to str
         dic_data = yaml.load(data)  # Converting str to dict
 

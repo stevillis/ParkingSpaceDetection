@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-image = cv2.imread('parking.jpeg')
+image = cv2.imread('parking2.jpeg')
 image_temp = image.copy()
 cv2.imshow('Image', image)
 cv2.waitKey(0)

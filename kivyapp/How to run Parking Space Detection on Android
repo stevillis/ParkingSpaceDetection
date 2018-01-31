@@ -1,0 +1,12 @@
+1 - Install Kivy Launcher app (https://apkpure.com/kivy-launcher/org.kivy.pygame)
+
+2 - Create a folder named kivy in the system storage
+
+3 - Paste your project into kivy folder (Your main aplication must called main.py)
+
+4 - Create a file named android.txt inside your project folder with the content:
+title=<Application Title>
+author=<Your Name>
+orientation=<portrait|landscape>
+
+5 - Open the Kivy Launcher and run the application

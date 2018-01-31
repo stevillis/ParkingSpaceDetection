@@ -1,44 +1,41 @@
 # -*- coding: utf-8 -*-
 
-import os
-import sys
+import ast
 
 import kivy
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.image import Image
-
-# Adding relative path
-cwd = os.getcwd()
-sys.path.append(cwd + '/../webparking/')
-
-import webreader
+from kivy.network.urlrequest import UrlRequest
 
 kivy.require('1.10.0')
 
 
 class WindowMain(BoxLayout):
+    def __init__(self, **kwargs):
+        super(WindowMain, self).__init__(**kwargs)
+        self.request = ''
+        self.data = ''
 
     def on_press_bt(self):
+        self.request = UrlRequest('http://192.168.1.6:5000', self.update_screen)
+
+    def update_screen(self, *args):
+        self.data = ast.literal_eval(str(self.request.result))
 
         # Remove widgets from StackLayouts
         self.ids.stack_layout_vaga_esquerda.clear_widgets()
         self.ids.stack_layout_vaga_direita.clear_widgets()
 
-        dic_web = webreader.read_web('http://192.168.137.26:5000')
-        print(dic_web)
-
         # Sort dic_web to
         # a list of tuples with dic_web keys ordered
-        dic_web_sorted = sorted(dic_web.items())
-        print(dic_web_sorted)
+        dic_web_sorted = sorted(self.data.items())
 
         # Parking space counters
         free_parking_spaces = 0
-        total_parking_spaces = len(dic_web)
+        total_parking_spaces = len(self.data)
 
         for item in dic_web_sorted:
-            print(item)
             # item[0] -> key, item[1] -> value
             if int(item[0]) <= 10:  # Add 10 parking spaces images in the left StackLayout                
                 if item[1]:  # Vaga vazia
